@@ -169,7 +169,7 @@ class Chessboard:
             FEN += chr(self.enPassantSquare[0]+97)
             FEN += str(self.enPassantSquare[1])
         else:
-            FEN += "- "
+            FEN += "-"
             
         FEN += " " + str(self.halfMoves)
         FEN += " " + str(self.fullMoves)
@@ -211,4 +211,19 @@ class Chessboard:
         print("Full moves: " ,self.fullMoves)
         print("Half moves: " ,self.halfMoves)
             
-    
+    def simulateMoveTempBoard(self,piece,goToPosition,enPassant = False):
+        
+        x,y = goToPosition
+        temporaryBoard = self.getTempBoard()
+        temporaryPiece = Piece(piece.row,piece.column,piece.pieceType)
+        temporaryBoard[piece.row][piece.column] = None
+        temporaryBoard[y][x]= temporaryPiece
+        temporaryPiece.position = (x,y)
+        if enPassant:
+            if piece.pieceType.color == "white":
+                temporaryBoard[y+1][x] = None
+            else:
+                temporaryBoard[y-1][x] = None
+        
+        return temporaryBoard[:]
+        

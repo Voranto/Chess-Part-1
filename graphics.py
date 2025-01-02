@@ -49,7 +49,7 @@ class Graphics:
     def checkForQuit(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.QUIT()
+                pygame.quit()
                 exit()
     
     def drawSquare(self,color,rect):
